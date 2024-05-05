@@ -4,6 +4,7 @@ import json
 import glob
 import re
 from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
+import model_downloader
 
 def pars_args():
     parser= argparse.ArgumentParser(description= "PAN 2024 Style Change Detection Task.")
@@ -139,7 +140,7 @@ def hard_test(problems, output_path):
     os.makedirs(output_path, exist_ok= True)
 
     for problem in problems:
-        print(f'{problem} file is working...')
+        # print(f'{problem} file is working...')
         preds= []
         sample_pred= []
 
@@ -172,7 +173,7 @@ def hard_test(problems, output_path):
 
 def main():
     args= pars_args()
-
+    model_downloader()
     for subtask in ['hard', 'easy', 'medium']:
         if subtask =='easy':
             problems= read_problem_files(args.input+f"/{subtask}")
