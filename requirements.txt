@@ -1,5 +1,3 @@
-datasets  
-evaluate
-accelerate
+argpars
 torch
 transformers
