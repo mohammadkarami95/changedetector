@@ -38,7 +38,7 @@ def easy_test(problems, output_path):
     # model = AutoModelForSequenceClassification.from_pretrained('MohammadKarami/simple-roberta')
     # tokenizer = AutoTokenizer.from_pretrained('MohammadKarami/simple-roberta')
     print('EASY functions')
-    print(f'Number of EASY files:{len(problems}')
+    print(f'Number of EASY files:{len(problems)}')
     classifier= pipeline('text-classification', model= 'MohammadKarami/simple-roberta', tokenizer='MohammadKarami/simple-roberta', max_length= 512, truncation= True)
     print('MODEL LOADED')
     print('working of easy files...')
@@ -62,7 +62,7 @@ def most_frequent(List):
 
 def medium_test(problems, output_path):
     print('medium function')
-    print(f'Number of MEDIUM files:{len(problems}')
+    print(f'Number of MEDIUM files:{len(problems)}')
     print('medium models is running...')
     # roberta_model = AutoModelForSequenceClassification.from_pretrained('./medium-roberta')
     # roberta_tokenizer = AutoTokenizer.from_pretrained('./medium-roberta')
@@ -134,7 +134,7 @@ def medium_test(problems, output_path):
     print('medium files predicted\n ------------------------------------\n')
 def hard_test(problems, output_path):
     print('Hard function')
-    print(f'Number of HARD files:{len(problems}')
+    print(f'Number of HARD files:{len(problems)}')
     print('Hard models is loading...')
     # roberta_model = AutoModelForSequenceClassification.from_pretrained('./hard-roberta')
     # roberta_tokenizer = AutoTokenizer.from_pretrained('./hard-roberta')
