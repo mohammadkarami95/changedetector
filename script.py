@@ -177,7 +177,7 @@ def main():
     args= pars_args()
     print('TESTING TIME')
     # model_downloader()
-    for subtask in ['hard', 'easy', 'medium']:
+    for subtask in ['easy', 'medium', 'hard']:
         if subtask =='easy':
             print('EASY is being READ...')
             problems= read_problem_files(args.input+f"/{subtask}")
