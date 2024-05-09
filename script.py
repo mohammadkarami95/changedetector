@@ -40,9 +40,9 @@ def easy_test(problems, output_path):
     print('EASY functions')
     classifier= pipeline('text-classification', model= 'MohammadKarami/simple-roberta', tokenizer='MohammadKarami/simple-roberta', max_length= 512, truncation= True)
     print('MODEL LOADED')
+    print('working of easy files...')
     os.makedirs(output_path, exist_ok= True)
     for problem in problems:
-        print(f'{problem} file is working...')
         preds= []
         for text in problems[problem]:
             output= classifier(text)
@@ -54,11 +54,14 @@ def easy_test(problems, output_path):
         with open(output_path+"/solution-"+file_num+".json", 'w') as out:
             prediction = {'changes': preds}
             out.write(json.dumps(prediction)) 
+    print('Easy files predicted\n ------------------------------------\n')
 
 def most_frequent(List):
     return max(set(List), key = List.count)
 
 def medium_test(problems, output_path):
+    print('medium function')
+    print('medium models is running...')
     # roberta_model = AutoModelForSequenceClassification.from_pretrained('./medium-roberta')
     # roberta_tokenizer = AutoTokenizer.from_pretrained('./medium-roberta')
     roberta_classifier= pipeline('text-classification', model='MohammadKarami/medium-roberta', tokenizer='MohammadKarami/medium-roberta', max_length= 512, truncation= True)
@@ -83,9 +86,9 @@ def medium_test(problems, output_path):
     # bert_classifier= pipeline('text-classification', model='MohammadKarami/medium-bert', tokenizer="MohammadKarami/medium-bert", max_length= 512, truncation= True)
     # whole_roberta_classifier= pipeline('text-classification', model='MohammadKarami/whole-roBERTa', tokenizer="MohammadKarami/whole-roBERTa", max_length= 512, truncation= True)
     # whole_electra_classifier= pipeline('text-classification', model='MohammadKarami/whole-electra', tokenizer="MohammadKarami/whole-electra", max_length= 512, truncation= True)
-
+    print('medium models is loaded')
     os.makedirs(output_path, exist_ok= True)
-
+    print('working on medium fils...')
     for problem in problems:
         # print(f'{problem} file is working...')
         preds= []
@@ -126,8 +129,10 @@ def medium_test(problems, output_path):
         with open(output_path+"/solution-"+file_num+".json", 'w') as out:
             prediction = {'changes': preds}
             out.write(json.dumps(prediction))
-
+    print('medium files predicted\n ------------------------------------\n')
 def hard_test(problems, output_path):
+    print('Hard function')
+    print('Hard models is loading...')
     # roberta_model = AutoModelForSequenceClassification.from_pretrained('./hard-roberta')
     # roberta_tokenizer = AutoTokenizer.from_pretrained('./hard-roberta')
     roberta_classifier= pipeline('text-classification', model='MohammadKarami/hard-roberta', tokenizer='MohammadKarami/hard-roberta', max_length= 512, truncation= True)
@@ -139,8 +144,10 @@ def hard_test(problems, output_path):
     # whole_roberta_model = AutoModelForSequenceClassification.from_pretrained('./whole-roBERTa')
     # whole_roberta_tokenizer = AutoTokenizer.from_pretrained('./whole-roBERTa')
     whole_roberta_classifier= pipeline('text-classification', model='MohammadKarami/whole-roBERTa', tokenizer='MohammadKarami/whole-roBERTa', max_length= 512, truncation= True)
+    print('Hard models loaded')
     os.makedirs(output_path, exist_ok= True)
 
+    print('working on medium files...')
     for problem in problems:
         # print(f'{problem} file is working...')
         preds= []
@@ -172,22 +179,26 @@ def hard_test(problems, output_path):
             prediction = {'changes': preds}
             out.write(json.dumps(prediction))
 
-
+    print('Hard files predicted!')
+    
 def main():
     args= pars_args()
     print('TESTING TIME')
     # model_downloader()
     for subtask in ['easy', 'medium', 'hard']:
         if subtask =='easy':
-            print('EASY is being READ...')
+            print('EASY files are reading...')
             problems= read_problem_files(args.input+f"/{subtask}")
-            print('EASY MODEL is working...')
             easy_test(problems, args.output+f"/{subtask}")
         elif subtask=='medium':
+            print('MEDIUM files are reading...')
             problems= read_problem_files(args.input+f"/{subtask}")
+            print('MEDIUM files are read')
             medium_test(problems, args.output+f"/{subtask}")
         else:
+            print('HARD files are reading...')
             problems= read_problem_files(args.input+f"/{subtask}")
+            print('HARD files are read')
             hard_test(problems, args.output+f"/{subtask}")
 
 
