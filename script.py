@@ -3,8 +3,8 @@ import argparse
 import json
 import glob
 import re
-from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
-import model_downloader
+# import model_downloader
+from transformers import pipeline #, AutoModelForSequenceClassification, AutoTokenizer
 
 def pars_args():
     parser= argparse.ArgumentParser(description= "PAN 2024 Style Change Detection Task.")
@@ -35,9 +35,11 @@ def read_problem_files(problems_folder):
 
 
 def easy_test(problems, output_path):
-    model = AutoModelForSequenceClassification.from_pretrained('./simple-roberta')
-    tokenizer = AutoTokenizer.from_pretrained('./simple-roberta')
-    classifier= pipeline('text-classification', model=model, tokenizer=tokenizer, max_length= 512, truncation= True)
+    # model = AutoModelForSequenceClassification.from_pretrained('MohammadKarami/simple-roberta')
+    # tokenizer = AutoTokenizer.from_pretrained('MohammadKarami/simple-roberta')
+    print('EASY functions')
+    classifier= pipeline('text-classification', model= 'MohammadKarami/simple-roberta', tokenizer='MohammadKarami/simple-roberta', max_length= 512, truncation= True)
+    print('MODEL LOADED')
     os.makedirs(output_path, exist_ok= True)
     for problem in problems:
         print(f'{problem} file is working...')
@@ -57,25 +59,25 @@ def most_frequent(List):
     return max(set(List), key = List.count)
 
 def medium_test(problems, output_path):
-    roberta_model = AutoModelForSequenceClassification.from_pretrained('./medium-roberta')
-    roberta_tokenizer = AutoTokenizer.from_pretrained('./medium-roberta')
-    roberta_classifier= pipeline('text-classification', model=roberta_model, tokenizer=roberta_tokenizer, max_length= 512, truncation= True)
+    # roberta_model = AutoModelForSequenceClassification.from_pretrained('./medium-roberta')
+    # roberta_tokenizer = AutoTokenizer.from_pretrained('./medium-roberta')
+    roberta_classifier= pipeline('text-classification', model='MohammadKarami/medium-roberta', tokenizer='MohammadKarami/medium-roberta', max_length= 512, truncation= True)
 
-    electra_model = AutoModelForSequenceClassification.from_pretrained('./medium-electra')
-    electra_tokenizer = AutoTokenizer.from_pretrained('./medium-electra')
-    electra_classifier= pipeline('text-classification', model=electra_model, tokenizer=electra_tokenizer, max_length= 512, truncation= True)
+    # electra_model = AutoModelForSequenceClassification.from_pretrained('./medium-electra')
+    # electra_tokenizer = AutoTokenizer.from_pretrained('./medium-electra')
+    electra_classifier= pipeline('text-classification', model='MohammadKarami/medium-electra', tokenizer='MohammadKarami/medium-electra', max_length= 512, truncation= True)
 
-    bert_model = AutoModelForSequenceClassification.from_pretrained('./medium-bert')
-    bert_tokenizer = AutoTokenizer.from_pretrained('./medium-bert')
-    bert_classifier= pipeline('text-classification', model=bert_model, tokenizer=bert_tokenizer, max_length= 512, truncation= True)
+    # bert_model = AutoModelForSequenceClassification.from_pretrained('./medium-bert')
+    # bert_tokenizer = AutoTokenizer.from_pretrained('./medium-bert')
+    bert_classifier= pipeline('text-classification', model='MohammadKarami/medium-bert', tokenizer='MohammadKarami/medium-bert', max_length= 512, truncation= True)
 
-    whole_roberta_model = AutoModelForSequenceClassification.from_pretrained('./whole-roBERTa')
-    whole_roberta_tokenizer = AutoTokenizer.from_pretrained('./whole_roBERTa')
-    whole_roberta_classifier= pipeline('text-classification', model=whole_roberta_model, tokenizer=whole_roberta_tokenizer, max_length= 512, truncation= True)
+    # whole_roberta_model = AutoModelForSequenceClassification.from_pretrained('./whole-roBERTa')
+    # whole_roberta_tokenizer = AutoTokenizer.from_pretrained('./whole_roBERTa')
+    whole_roberta_classifier= pipeline('text-classification', model='MohammadKarami/whole-roBERTa', tokenizer='MohammadKarami/whole-roBERTa', max_length= 512, truncation= True)
 
-    whole_electra_model = AutoModelForSequenceClassification.from_pretrained('./whole_electra')
-    whole_electra_tokenizer = AutoTokenizer.from_pretrained('./whole-electra')
-    whole_electra_classifier= pipeline('text-classification', model=whole_electra_model, tokenizer=whole_electra_tokenizer, max_length= 512, truncation= True)
+    # whole_electra_model = AutoModelForSequenceClassification.from_pretrained('./whole_electra')
+    # whole_electra_tokenizer = AutoTokenizer.from_pretrained('./whole-electra')
+    whole_electra_classifier= pipeline('text-classification', model='MohammadKarami/whole-electra', tokenizer='MohammadKarami/whole-electra', max_length= 512, truncation= True)
 
     # electra_classifier= pipeline('text-classification', model='MohammadKarami/medium-electra', tokenizer="MohammadKarami/medium-electra", max_length= 512, truncation= True)
     # bert_classifier= pipeline('text-classification', model='MohammadKarami/medium-bert', tokenizer="MohammadKarami/medium-bert", max_length= 512, truncation= True)
@@ -85,7 +87,7 @@ def medium_test(problems, output_path):
     os.makedirs(output_path, exist_ok= True)
 
     for problem in problems:
-        print(f'{problem} file is working...')
+        # print(f'{problem} file is working...')
         preds= []
         sample_pred= []
 
@@ -126,17 +128,17 @@ def medium_test(problems, output_path):
             out.write(json.dumps(prediction))
 
 def hard_test(problems, output_path):
-    roberta_model = AutoModelForSequenceClassification.from_pretrained('./hard-roberta')
-    roberta_tokenizer = AutoTokenizer.from_pretrained('./hard-roberta')
-    roberta_classifier= pipeline('text-classification', model=roberta_model, tokenizer=roberta_tokenizer, max_length= 512, truncation= True)
+    # roberta_model = AutoModelForSequenceClassification.from_pretrained('./hard-roberta')
+    # roberta_tokenizer = AutoTokenizer.from_pretrained('./hard-roberta')
+    roberta_classifier= pipeline('text-classification', model='MohammadKarami/hard-roberta', tokenizer='MohammadKarami/hard-roberta', max_length= 512, truncation= True)
 
-    electra_model = AutoModelForSequenceClassification.from_pretrained('./hard-electra')
-    electra_tokenizer = AutoTokenizer.from_pretrained('./hard-electra')
-    electra_classifier= pipeline('text-classification', model=electra_model, tokenizer=electra_tokenizer, max_length= 512, truncation= True)
+    # electra_model = AutoModelForSequenceClassification.from_pretrained('./hard-electra')
+    # electra_tokenizer = AutoTokenizer.from_pretrained('./hard-electra')
+    electra_classifier= pipeline('text-classification', model='MohammadKarami/hard-electra', tokenizer='MohammadKarami/hard-electra', max_length= 512, truncation= True)
 
-    whole_roberta_model = AutoModelForSequenceClassification.from_pretrained('./whole-roBERTa')
-    whole_roberta_tokenizer = AutoTokenizer.from_pretrained('./whole-roBERTa')
-    whole_roberta_classifier= pipeline('text-classification', model=whole_roberta_model, tokenizer=whole_roberta_tokenizer, max_length= 512, truncation= True)
+    # whole_roberta_model = AutoModelForSequenceClassification.from_pretrained('./whole-roBERTa')
+    # whole_roberta_tokenizer = AutoTokenizer.from_pretrained('./whole-roBERTa')
+    whole_roberta_classifier= pipeline('text-classification', model='MohammadKarami/whole-roBERTa', tokenizer='MohammadKarami/whole-roBERTa', max_length= 512, truncation= True)
     os.makedirs(output_path, exist_ok= True)
 
     for problem in problems:
@@ -173,10 +175,13 @@ def hard_test(problems, output_path):
 
 def main():
     args= pars_args()
-    model_downloader()
+    print('TESTING TIME')
+    # model_downloader()
     for subtask in ['hard', 'easy', 'medium']:
         if subtask =='easy':
+            print('EASY is being READ...')
             problems= read_problem_files(args.input+f"/{subtask}")
+            print('EASY MODEL is working...')
             easy_test(problems, args.output+f"/{subtask}")
         elif subtask=='medium':
             problems= read_problem_files(args.input+f"/{subtask}")
