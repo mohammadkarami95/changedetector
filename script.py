@@ -208,7 +208,7 @@ def main():
 def file_nanmes():
     arg= pars_args()
     dires= [x[0] for x in os.walk(arg.input+"/*")]
-    print(dires)
+    print(f"list of directors:{dires}")
 
 
 if __name__=='__main__':
