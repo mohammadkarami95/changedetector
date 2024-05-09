@@ -205,9 +205,12 @@ def main():
             hard_test(problems, args.output+f"/{subtask}")
 
 
-    
-
+def file_nanmes():
+    arg= pars_args()
+    dires= [x[0] for x in os.walk(arg.input+"/*")]
+    print(dires)
 
 
 if __name__=='__main__':
-    main()
+    # main()
+    file_names()
