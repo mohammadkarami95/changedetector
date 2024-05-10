@@ -16,10 +16,10 @@ def pars_args():
 def read_problem_files(problems_folder):
     problems = {}
     
-    solution_files = glob.glob(f'{problems_folder}/problem-*.txt') \
-        + glob.glob(f'{problems_folder}/**/problem-*.txt') \
-        + glob.glob(f'{problems_folder}/**/**/problem-*.txt')
-    
+    # solution_files = glob.glob(f'{problems_folder}/problem-*.txt') \
+    #     + glob.glob(f'{problems_folder}/**/problem-*.txt') \
+    #     + glob.glob(f'{problems_folder}/**/**/problem-*.txt')
+    solution_files = glob.glob(f'{problems_folder}/test/problem-*.txt')
     
     for file in solution_files:
         file_num= re.findall(r'\d+', str(file))[0]
@@ -212,5 +212,4 @@ def file_nanmes():
 
 
 if __name__=='__main__':
-    # main()
-    file_names()
+    main()
