@@ -207,13 +207,18 @@ def main():
 
 
 def file_names(input):
-    directory_list = list()
-    for root, dirs, files in os.walk(input, topdown=False):
-        for name in dirs:
-            directory_list.append(os.path.join(root, name))
-    print("directory names:" + str(directory_list))
+#     directory_list = list()
+#     for root, dirs, files in os.walk(f'{input}/*', topdown=False):
+#         for name in dirs:
+#             directory_list.append(os.path.join(root, name))
+#     print("directory names:" + str(directory_list))
+
+    files=[]
+    files = [f for f in sorted(os.listdir(f'{input}/*'))]
+    print(f'directories: {files}')
+    
 
 if __name__=='__main__':
     # main()
-    arg= pars_args()
-    file_names(arg.input)
+    args= pars_args()
+    file_names(args.input)
