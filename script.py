@@ -15,26 +15,12 @@ def pars_args():
 
 def read_problem_files(problems_folder):
     problems = {}
-
-    directories_in_curdir = list(filter(os.path.isdir, os.listdir(os.curdir)))
-    print(f"First back {directories_in_curdir}")
-    
-    os.chdir("..")
-    directories_in_curdir = list(filter(os.path.isdir, os.listdir(os.curdir)))
-    print(f"Second back {directories_in_curdir}")
-
-    os.chdir("..")
-    directories_in_curdir = list(filter(os.path.isdir, os.listdir(os.curdir)))
-    print(f"Third back {directories_in_curdir}")
-
-    
-    
     
     solution_files = glob.glob(f'{problems_folder}/problem-*.txt') \
         + glob.glob(f'{problems_folder}/**/problem-*.txt') \
         + glob.glob(f'{problems_folder}/**/**/problem-*.txt')
     # solution_files = glob.glob(f'{problems_folder}/test/problem-*.txt')
-    print(f'Some of solution_files are: {solution_files[:5]}')
+    # print(f'Some of solution_files are: {solution_files[:5]}')
     
     for file in solution_files:
         file_num= re.findall(r'\d+', str(file))[0]
@@ -219,20 +205,7 @@ def main():
             print('HARD files are read')
             hard_test(problems, args.output+f"/{subtask}")
 
-
-def file_names(input):
-#     directory_list = list()
-#     for root, dirs, files in os.walk(f'{input}/*', topdown=False):
-#         for name in dirs:
-#             directory_list.append(os.path.join(root, name))
-#     print("directory names:" + str(directory_list))
-
-    files=[]
-    files = [f for f in sorted(os.listdir(f'{input}/*'))]
-    print(f'directories: {files}')
     
 
 if __name__=='__main__':
     main()
-    # args= pars_args()
-    # file_names(args.input)
