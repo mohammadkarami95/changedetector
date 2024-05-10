@@ -219,6 +219,6 @@ def file_names(input):
     
 
 if __name__=='__main__':
-    # main()
-    args= pars_args()
-    file_names(args.input)
+    main()
+    # args= pars_args()
+    # file_names(args.input)
