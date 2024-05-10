@@ -20,7 +20,7 @@ def read_problem_files(problems_folder):
         + glob.glob(f'{problems_folder}/**/problem-*.txt') \
         + glob.glob(f'{problems_folder}/**/**/problem-*.txt')
     # solution_files = glob.glob(f'{problems_folder}/test/problem-*.txt')
-    print(f'Some of solution_files are: {solution_files[:5]})
+    print(f'Some of solution_files are: {solution_files[:5]}')
     
     for file in solution_files:
         file_num= re.findall(r'\d+', str(file))[0]
