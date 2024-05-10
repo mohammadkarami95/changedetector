@@ -15,6 +15,20 @@ def pars_args():
 
 def read_problem_files(problems_folder):
     problems = {}
+
+    directories_in_curdir = list(filter(os.path.isdir, os.listdir(os.curdir)))
+    print(f"First back {directories_in_curdire}")
+    
+    os.chdir("..")
+    directories_in_curdir = list(filter(os.path.isdir, os.listdir(os.curdir)))
+    print(f"Second back {directories_in_curdire}")
+
+    os.chdir("..")
+    directories_in_curdir = list(filter(os.path.isdir, os.listdir(os.curdir)))
+    print(f"Third back {directories_in_curdire}")
+
+    
+    
     
     solution_files = glob.glob(f'{problems_folder}/problem-*.txt') \
         + glob.glob(f'{problems_folder}/**/problem-*.txt') \
