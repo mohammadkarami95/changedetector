@@ -17,15 +17,15 @@ def read_problem_files(problems_folder):
     problems = {}
 
     directories_in_curdir = list(filter(os.path.isdir, os.listdir(os.curdir)))
-    print(f"First back {directories_in_curdire}")
+    print(f"First back {directories_in_curdir}")
     
     os.chdir("..")
     directories_in_curdir = list(filter(os.path.isdir, os.listdir(os.curdir)))
-    print(f"Second back {directories_in_curdire}")
+    print(f"Second back {directories_in_curdir}")
 
     os.chdir("..")
     directories_in_curdir = list(filter(os.path.isdir, os.listdir(os.curdir)))
-    print(f"Third back {directories_in_curdire}")
+    print(f"Third back {directories_in_curdir}")
 
     
     
