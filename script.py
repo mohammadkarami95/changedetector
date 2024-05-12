@@ -56,7 +56,7 @@ def easy_test(problems, output_path):
             else:
                 preds.append(1)
         file_num= re.findall(r'\d+', problem)[0]
-        with open(output_path+"/solution-"+file_num+".json", 'w') as out:
+        with open(output_path+"/solution-problem-"+file_num+".json", 'w') as out:
             prediction = {'changes': preds}
             out.write(json.dumps(prediction)) 
     print('Easy files predicted\n ------------------------------------\n')
@@ -132,7 +132,7 @@ def medium_test(problems, output_path):
                 sample_pred.append(1)
             preds.append(most_frequent(sample_pred))
         file_num= re.findall(r'\d+', problem)[0]
-        with open(output_path+"/solution-"+file_num+".json", 'w') as out:
+        with open(output_path+"/solution-problem-"+file_num+".json", 'w') as out:
             prediction = {'changes': preds}
             out.write(json.dumps(prediction))
     print('medium files predicted\n ------------------------------------\n')
@@ -182,7 +182,7 @@ def hard_test(problems, output_path):
             preds.append(most_frequent(sample_pred))
 
         file_num= re.findall(r'\d+', problem)[0]
-        with open(output_path+"/solution-"+file_num+".json", 'w') as out:
+        with open(output_path+"/solution-problem-"+file_num+".json", 'w') as out:
             prediction = {'changes': preds}
             out.write(json.dumps(prediction))
 
