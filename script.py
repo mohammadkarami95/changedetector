@@ -4,7 +4,10 @@ import json
 import glob
 import re
 # import model_downloader
+import torch
 from transformers import pipeline #, AutoModelForSequenceClassification, AutoTokenizer
+
+cuda_device = 0 if torch.cuda.is_available() and torch.cuda.device_count() > 0 else -1
 
 def pars_args():
     parser= argparse.ArgumentParser(description= "PAN 2024 Style Change Detection Task.")
@@ -23,7 +26,7 @@ def read_problem_files(problems_folder):
     # print(f'Some of solution_files are: {solution_files[:5]}')
     print(f"Some of problems: {solution_files[:5]}")
     for file in solution_files:
-        file_num= re.findall(r'\d+', str(file))[0]
+        file_num= re.findall(r'\d+', str(file).split('/problem-')[1])[0]
         with open(file, 'r') as f:
             data= []
             problem= f.readlines()
@@ -40,7 +43,7 @@ def easy_test(problems, output_path):
     # tokenizer = AutoTokenizer.from_pretrained('MohammadKarami/simple-roberta')
     print('EASY functions')
     print(f'Number of EASY files:{len(problems)}')
-    classifier= pipeline('text-classification', model= 'MohammadKarami/simple-roberta', tokenizer='MohammadKarami/simple-roberta', max_length= 512, truncation= True)
+    classifier= pipeline('text-classification', model= 'MohammadKarami/simple-roberta', tokenizer='MohammadKarami/simple-roberta', max_length= 512, truncation=True, device=cuda_device)
     print('MODEL LOADED')
     print('working of easy files...')
     os.makedirs(output_path, exist_ok= True)
@@ -67,23 +70,23 @@ def medium_test(problems, output_path):
     print('medium models is running...')
     # roberta_model = AutoModelForSequenceClassification.from_pretrained('./medium-roberta')
     # roberta_tokenizer = AutoTokenizer.from_pretrained('./medium-roberta')
-    roberta_classifier= pipeline('text-classification', model='MohammadKarami/medium-roberta', tokenizer='MohammadKarami/medium-roberta', max_length= 512, truncation= True)
+    roberta_classifier= pipeline('text-classification', model='MohammadKarami/medium-roberta', tokenizer='MohammadKarami/medium-roberta', max_length= 512, truncation=True, device=cuda_device)
 
     # electra_model = AutoModelForSequenceClassification.from_pretrained('./medium-electra')
     # electra_tokenizer = AutoTokenizer.from_pretrained('./medium-electra')
-    electra_classifier= pipeline('text-classification', model='MohammadKarami/medium-electra', tokenizer='MohammadKarami/medium-electra', max_length= 512, truncation= True)
+    electra_classifier= pipeline('text-classification', model='MohammadKarami/medium-electra', tokenizer='MohammadKarami/medium-electra', max_length= 512, truncation=True, device=cuda_device)
 
     # bert_model = AutoModelForSequenceClassification.from_pretrained('./medium-bert')
     # bert_tokenizer = AutoTokenizer.from_pretrained('./medium-bert')
-    bert_classifier= pipeline('text-classification', model='MohammadKarami/medium-bert', tokenizer='MohammadKarami/medium-bert', max_length= 512, truncation= True)
+    bert_classifier= pipeline('text-classification', model='MohammadKarami/medium-bert', tokenizer='MohammadKarami/medium-bert', max_length= 512, truncation= True, device=cuda_device)
 
     # whole_roberta_model = AutoModelForSequenceClassification.from_pretrained('./whole-roBERTa')
     # whole_roberta_tokenizer = AutoTokenizer.from_pretrained('./whole_roBERTa')
-    whole_roberta_classifier= pipeline('text-classification', model='MohammadKarami/whole-roBERTa', tokenizer='MohammadKarami/whole-roBERTa', max_length= 512, truncation= True)
+    whole_roberta_classifier= pipeline('text-classification', model='MohammadKarami/whole-roBERTa', tokenizer='MohammadKarami/whole-roBERTa', max_length= 512, truncation=True, device=cuda_device)
 
     # whole_electra_model = AutoModelForSequenceClassification.from_pretrained('./whole_electra')
     # whole_electra_tokenizer = AutoTokenizer.from_pretrained('./whole-electra')
-    whole_electra_classifier= pipeline('text-classification', model='MohammadKarami/whole-electra', tokenizer='MohammadKarami/whole-electra', max_length= 512, truncation= True)
+    whole_electra_classifier= pipeline('text-classification', model='MohammadKarami/whole-electra', tokenizer='MohammadKarami/whole-electra', max_length= 512, truncation=True, device=cuda_device)
 
     # electra_classifier= pipeline('text-classification', model='MohammadKarami/medium-electra', tokenizer="MohammadKarami/medium-electra", max_length= 512, truncation= True)
     # bert_classifier= pipeline('text-classification', model='MohammadKarami/medium-bert', tokenizer="MohammadKarami/medium-bert", max_length= 512, truncation= True)
@@ -139,15 +142,15 @@ def hard_test(problems, output_path):
     print('Hard models is loading...')
     # roberta_model = AutoModelForSequenceClassification.from_pretrained('./hard-roberta')
     # roberta_tokenizer = AutoTokenizer.from_pretrained('./hard-roberta')
-    roberta_classifier= pipeline('text-classification', model='MohammadKarami/hard-roberta', tokenizer='MohammadKarami/hard-roberta', max_length= 512, truncation= True)
+    roberta_classifier= pipeline('text-classification', model='MohammadKarami/hard-roberta', tokenizer='MohammadKarami/hard-roberta', max_length= 512, truncation=True, device=cuda_device)
 
     # electra_model = AutoModelForSequenceClassification.from_pretrained('./hard-electra')
     # electra_tokenizer = AutoTokenizer.from_pretrained('./hard-electra')
-    electra_classifier= pipeline('text-classification', model='MohammadKarami/hard-electra', tokenizer='MohammadKarami/hard-electra', max_length= 512, truncation= True)
+    electra_classifier= pipeline('text-classification', model='MohammadKarami/hard-electra', tokenizer='MohammadKarami/hard-electra', max_length= 512, truncation=True, device=cuda_device)
 
     # whole_roberta_model = AutoModelForSequenceClassification.from_pretrained('./whole-roBERTa')
     # whole_roberta_tokenizer = AutoTokenizer.from_pretrained('./whole-roBERTa')
-    whole_roberta_classifier= pipeline('text-classification', model='MohammadKarami/whole-roBERTa', tokenizer='MohammadKarami/whole-roBERTa', max_length= 512, truncation= True)
+    whole_roberta_classifier= pipeline('text-classification', model='MohammadKarami/whole-roBERTa', tokenizer='MohammadKarami/whole-roBERTa', max_length= 512, truncation=True, device=cuda_device)
     print('Hard models loaded')
     os.makedirs(output_path, exist_ok= True)
 
